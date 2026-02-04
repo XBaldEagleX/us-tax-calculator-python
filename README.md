@@ -47,7 +47,8 @@ Follow the prompts to enter filing status, income, and deductions.
 I wanted a hands-on way to understand how U.S. tax brackets actually work
 instead of relying on online calculators. This project helped reinforce and build upon both Python fundamentals and real-world economic concepts.
 
-## Future Improvement
+## Roadmap of Improvemnets
+Planned enhancements are tracked in the GitHub Issues tab and include:
 - FICA estimates
 - Additional fillinf statueses (HOH, MFS)
 - State Tax Implementation
