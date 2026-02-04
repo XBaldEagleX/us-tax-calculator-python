@@ -24,11 +24,11 @@ This project was built as a learning exercise to better understand:
 
 ## Example Output
 === Federal Tax Summary ===
-Gross income: $64,200
-Taxable income: $32,700
-Total federal tax: $3,447
-Marginal rate: 12%
-Effective rate: 5.37%
+- Gross income: $64,200
+- Taxable income: $32,700
+- Total federal tax: $3,447
+- Marginal rate: 12%
+- Effective rate: 5.37%
 
 
 ## Why I Built This
