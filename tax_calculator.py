@@ -1,6 +1,4 @@
 """
-Created on Tue Feb  3 17:34:35 2026
-
 Title: Simple U.S. Federal Income Tax Bracket Calculator
 
 @author: Craig A. Willits Jr
