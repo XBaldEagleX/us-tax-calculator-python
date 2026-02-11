@@ -1,4 +1,5 @@
 """
+Created on Tue Feb  3 17:34:35 2026
 Title: Simple U.S. Federal Income Tax Bracket Calculator
 
 @author: Craig A. Willits Jr
@@ -16,6 +17,7 @@ Notes:
 """
 
 while True:
+    from state_tax import normalize_state, calculate_state_tax_none_only
 # Define our income
     def get_income(filing_status):
         if filing_status == "single":
@@ -47,6 +49,7 @@ while True:
             print('Please enter Y or N.\n')
             
     print('Income confirmed. Moving on...')
+    print("\n" + "="*40 + "\n")
     print('')
     
     # Account for Standard Deduction
@@ -86,6 +89,11 @@ while True:
     taxable_income, deduction, deduction_type = apply_standard_deduction(filing_status, income)
     
     print(f"{deduction_type} applied: ${deduction:,.2f}")
+    print(f"Your Taxable income is: ${taxable_income:,.2f}")
+    print('\n' + '-'*40 + '\n')
+    
+    state = normalize_state(input("Please indicate your state (ex. TX): "))
+    state_tax, state_label = calculate_state_tax_none_only(taxable_income, state)
     print('')
     print(f"Your Taxable income is: ${taxable_income:,.2f}")
     
@@ -156,6 +164,12 @@ while True:
     
     total_tax, breakdown = calculate_tax_breakdown(taxable_income, brackets)
     
+    print('Federal Tax Bracket Breakdown')
+    print('-'*30)
+    for rate, amount, tax, lower, upper in breakdown:
+        upper_text = 'and up' if upper is None else f'${upper:,.0f}'
+        print(f'{rate*100:.0f}% on ${lower:,.0f} to {upper_text}: '
+              f'taxed ${amount:,.2f} -> ${tax:,.2f}')
     print(f"\nTotal federal income tax owed: ${total_tax:,.2f}")
     print("\n--- Bracket Breakdown ---")
     for rate, amount, tax, lower, upper in breakdown:
@@ -175,6 +189,18 @@ while True:
     
         return marginal_rate
     
+    # Calculate marginal rate
+    marginal_rate = get_marginal_rate(taxable_income, brackets)
+    
+    # Calculate effective rate
+    effective_rate = total_tax / income if income > 0 else 0
+    
+    # Calculate post tax income
+    after_tax_income = income - total_tax
+    
+    
+    # Spacer
+    print("\n" + "="*40)
     # Call marginal rate
     marginal_rate = get_marginal_rate(taxable_income, brackets)
     print(f"\nMarginal tax rate: {marginal_rate * 100:.0f}%")
@@ -196,6 +222,11 @@ while True:
     print(f"Taxable income: ${taxable_income:,.2f}")
     print("--------------------------------------")
     print(f"Total federal income tax: ${total_tax:,.2f}")
+    if state_tax is None:
+        print(f"State income tax ({state}): {state_label}")
+    else:
+        print(f"State income tax ({state}): ${state_tax:,.2f} ({state_label})")
+    print("--------------------------------------")
     print(f"Marginal tax rate: {marginal_rate*100:.0f}%")
     print(f"Effective tax rate: {effective_rate*100:.2f}%")
     print(f"After-tax income (federal only): ${after_tax_income:,.2f}")
