@@ -28,6 +28,7 @@ It emphasizes the difference between marginal and effective tax rates; a concept
   - After-tax income (federal only)
 - Clean summary output
 - Restartable CLI workflow
+- Basic state income tax estimation (currently supports no-tax states only; others marked N/A)
 
 ## How to Run
 Requirements
